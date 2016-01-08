@@ -2,10 +2,10 @@ package org.javafxee.config;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import org.javafxee.controller.ShopCartController;
 import org.javafxee.controller.UserController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,13 @@ import java.io.InputStream;
  */
 @Configuration
 public class AppConfiguration {
+
+    @Bean
+    @Scope(value = "prototype")
+    public FXMLLoader getFXMLLoader() {
+        return new FXMLLoader();
+    }
+
     @Bean(name = "userFXML")
     public InputStream getUserFxml() throws IOException {
         return this.getFxmlInputStream("fxml/user.fxml");
@@ -27,29 +34,9 @@ public class AppConfiguration {
 
     @Bean(name = "userNode")
     public Node getUserNode() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setController(getUserController());
-        Node node = loader.load(getUserFxml());
-        return node;
-    }
-
-
-    @Bean(name = "shopCarFXML")
-    public InputStream getShopCarFxml() throws IOException {
-        return this.getFxmlInputStream("fxml/shopcar.fxml");
-    }
-
-    @Bean(name = "shopCarController")
-    public ShopCartController getShopCharController() {
-        return new ShopCartController();
-    }
-
-    @Bean(name = "shopNode")
-    public Node getShopNode() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setController(getShopCharController());
-        Node node = loader.load(getShopCarFxml());
-        return node;
+        FXMLLoader fxmlLoader = getFXMLLoader();
+        fxmlLoader.setController(getUserController());
+        return fxmlLoader.load(getUserFxml());
     }
 
     protected InputStream getFxmlInputStream(String fileName) {
