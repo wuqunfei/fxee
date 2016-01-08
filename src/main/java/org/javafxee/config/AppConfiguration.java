@@ -2,6 +2,7 @@ package org.javafxee.config;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import org.javafxee.controller.CarController;
 import org.javafxee.controller.UserController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,11 @@ public class AppConfiguration {
         return new FXMLLoader();
     }
 
+    protected InputStream getFxmlInputStream(String fileName) {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
+        return inputStream;
+    }
+
     @Bean(name = "userFXML")
     public InputStream getUserFxml() throws IOException {
         return this.getFxmlInputStream("fxml/user.fxml");
@@ -39,10 +45,24 @@ public class AppConfiguration {
         return fxmlLoader.load(getUserFxml());
     }
 
-    protected InputStream getFxmlInputStream(String fileName) {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
-        return inputStream;
+    @Bean(name = "carFxml")
+    public InputStream getCarFXML() throws IOException{
+        return this.getFxmlInputStream("fxml/car.fxml");
     }
+
+    @Bean(name = "carController")
+    public CarController getCarController() {
+        return new CarController();
+    }
+
+
+    @Bean(name = "carNode")
+    public Node getCarNode() throws IOException {
+        FXMLLoader fxmlLoader = getFXMLLoader();
+        fxmlLoader.setController(getCarController());
+        return fxmlLoader.load(getCarFXML());
+    }
+
 
 
 }

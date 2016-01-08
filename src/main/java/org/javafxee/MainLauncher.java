@@ -2,6 +2,8 @@ package org.javafxee;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.javafxee.launcher.AbstractFxApplication;
@@ -22,9 +24,11 @@ public class MainLauncher extends AbstractFxApplication {
 
     @Override
     public void start(Stage primaryStage) {
-        StackPane root = new StackPane();
-        Node node = this.applicationContext.getBean("userNode",Node.class);
-        root.getChildren().add(node);
+        BorderPane root = new BorderPane();
+        Node nodeLeft = this.applicationContext.getBean("userNode",Node.class);
+        Node nodeRight = this.applicationContext.getBean("carNode",Node.class);
+        root.setLeft(nodeLeft);
+        root.setRight(nodeRight);
         Scene scene = new Scene(root, 300, 250);
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
