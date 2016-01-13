@@ -33,6 +33,7 @@ public class AppConfiguration {
         return this.getFxmlInputStream("fxml/user.fxml");
     }
 
+    //TODO if configured controller as @controller, this step is duplicated
     @Bean(name = "userController")
     public UserController getUserController() {
         return new UserController();
@@ -50,6 +51,7 @@ public class AppConfiguration {
         return this.getFxmlInputStream("fxml/car.fxml");
     }
 
+    //TODO if configured controller as @controller, this step is duplicated
     @Bean(name = "carController")
     public CarController getCarController() {
         return new CarController();
