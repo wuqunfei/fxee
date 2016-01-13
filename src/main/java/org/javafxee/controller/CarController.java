@@ -10,14 +10,13 @@ import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
+
 
 /**
  * Created by wuqunfei on 16/1/8.
  */
 @Controller
 public class CarController implements Initializable {
-    static Logger logger = Logger.getLogger(CarController.class.getName());
 
     @FXML
     Label label;

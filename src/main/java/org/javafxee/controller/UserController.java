@@ -20,10 +20,6 @@ public class UserController implements Initializable{
     @Autowired
     ApplicationEventPublisher publisher;
 
-    public UserController() {
-
-    }
-
     @FXML
     Button button;
 
