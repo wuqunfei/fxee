@@ -2,6 +2,6 @@
 
 <?import javafx.scene.control.*?>
 
-<Button layoutX="259.0" layoutY="173.0" mnemonicParsing="false" text="Button" fx:id="button"
+<Button layoutX="259.0" layoutY="173.0" mnemonicParsing="false" text="Send Message" fx:id="button"
         xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"/>
 
